@@ -27,7 +27,7 @@ class TiledComponent extends Component {
     await future;
   }
 
-  bool loaded() => _tiled.loaded();
+  bool get isLoaded => _tiled.loaded();
 
   get future => _tiled.future;
 

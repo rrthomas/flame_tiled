@@ -1,10 +1,9 @@
-import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/widgets.dart' hide Animation, Image;
-import 'package:tiled/tiled.dart' show ObjectGroup, TiledObject;
+import 'package:tiled/tiled.dart' show ObjectGroup;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,7 +13,7 @@ void main() {
   ));
 }
 
-class TiledGame extends BaseGame {
+class TiledGame extends FlameGame {
 
   @override
   Future<void> onLoad() async {
@@ -27,7 +26,7 @@ class TiledGame extends BaseGame {
     final ObjectGroup objGroup =
         await tiledMap.getObjectGroupFromLayer("AnimatedCoins");
     final sprite = await Sprite.load('coins.png');
-    objGroup.objects.forEach((TiledObject obj) {
+    for (var obj in objGroup.objects) {
       final comp = SpriteAnimationComponent(
         animation: SpriteAnimation.fromFrameData(
           sprite.image,
@@ -42,6 +41,6 @@ class TiledGame extends BaseGame {
       );
 
       add(comp);
-    });
+    }
   }
 }
